@@ -1,0 +1,23 @@
+title: "El Niño Resource Library"
+description: "Animations, videos, and teaching materials on El Niño and the Southern Oscillation from the SDSU Climate Informatics Lab."
+lab_name: "SDSU Climate Informatics Lab"
+baseurl: "/El_Nino_SDSU"  
+url: ""                    
+
+collections:
+  resources:
+    output: true
+    permalink: /resources/:name/
+
+defaults:
+  - scope: { path: "", type: "resources" }
+    values: { layout: "resource" }
+  - scope: { path: "" }
+    values: { layout: "default" }
+
+# Filter options shown on the Library page
+resource_types: [Animation, Video, Image, Dataset, Lesson]
+topics: [ENSO Basics, Ocean, Atmosphere, Impacts, Forecasting, Historical Events]
+audiences: [General Public, Students, Educators, Researchers]
+
+exclude: [README.md, Gemfile, Gemfile.lock]
