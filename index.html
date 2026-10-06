@@ -1,0 +1,60 @@
+---
+title: Home
+---
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">{{ site.lab_name }}</p>
+      <h1>See El Niño unfold across the Pacific.</h1>
+      <p class="lede">Animations, videos, data, and lessons that show how the Pacific Ocean and atmosphere shape climate around the world. Free for teaching, learning, and research.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ '/library/' | relative_url }}">Browse the library</a>
+        <a class="btn btn-ghost-light" href="{{ '/learn/' | relative_url }}">What is El Niño?</a>
+      </div>
+    </div>
+    {% assign hero = site.resources | where: "hero", true | first %}
+    <a class="hero-feature" href="{% if hero %}{{ hero.url | relative_url }}{% else %}{{ '/library/' | relative_url }}{% endif %}">
+      <div class="hero-media" aria-hidden="true"><div class="sst-band"></div></div>
+      <p class="hero-caption"><span class="badge">Featured</span> {% if hero %}{{ hero.title }}{% else %}Featured animation{% endif %}</p>
+    </a>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head">
+    <h2>Browse by type</h2>
+    <a href="{{ '/library/' | relative_url }}">View all {{ site.resources.size }} resources →</a>
+  </div>
+  <div class="type-grid">
+    {% assign blurbs = "Animation:Maps and fields in motion,Video:Explainers and lectures,Image:Figures and static maps,Dataset:Files for analysis,Lesson:Classroom-ready activities" | split: "," %}
+    {% for b in blurbs %}
+      {% assign parts = b | split: ":" %}
+      {% assign n = site.resources | where: "type", parts[0] | size %}
+      <a class="type-tile thumb--{{ parts[0] | downcase }}" href="{{ '/library/' | relative_url }}?type={{ parts[0] }}">
+        <strong>{{ parts[0] }}s</strong>
+        <span>{{ parts[1] }}</span>
+        <em>{{ n }}</em>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head">
+    <h2>Featured resources</h2>
+  </div>
+  <div class="card-grid">
+    {% assign featured = site.resources | where: "featured", true %}
+    {% for r in featured limit: 4 %}{% include resource-card.html resource=r %}{% endfor %}
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap band-inner">
+    <div>
+      <h2>New to El Niño?</h2>
+      <p>Start with a short guided path: what El Niño and La Niña are, how scientists measure them, and why they matter for rainfall, fisheries, and economies.</p>
+    </div>
+    <a class="btn btn-primary" href="{{ '/learn/' | relative_url }}">Start learning</a>
+  </div>
+</section>
