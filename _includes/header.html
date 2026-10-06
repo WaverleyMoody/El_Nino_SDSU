@@ -1,0 +1,16 @@
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">El Niño <em>Resource Library</em></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+    <nav class="site-nav">
+      {% assign links = "Home|/,Library|/library/,Learn|/learn/,About|/about/" | split: "," %}
+      {% for l in links %}
+        {% assign p = l | split: "|" %}
+        <a href="{{ p[1] | relative_url }}" {% if page.url == p[1] %}aria-current="page"{% endif %}>{{ p[0] }}</a>
+      {% endfor %}
+    </nav>
+  </div>
+</header>
