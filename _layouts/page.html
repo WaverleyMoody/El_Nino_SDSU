@@ -1,0 +1,18 @@
+---
+layout: default
+---
+<section class="page-head">
+  <div class="wrap">
+    <h1>{{ page.title }}</h1>
+    {% if page.lede %}<p class="lede">{{ page.lede }}</p>{% endif %}
+  </div>
+</section>
+<div class="wrap page-body">
+  {% if page.toc %}
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      {% for t in page.toc %}<a href="#{{ t.id }}">{{ t.label }}</a>{% endfor %}
+    </nav>
+  {% endif %}
+  <article class="prose">{{ content }}</article>
+</div>
