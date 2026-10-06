@@ -1,0 +1,57 @@
+---
+layout: default
+---
+{% assign r = page %}
+<div class="wrap resource-page">
+  <nav class="crumbs"><a href="{{ '/library/' | relative_url }}">Library</a> / <span>{{ r.type }}</span></nav>
+  <h1>{{ r.title }}</h1>
+  <p class="lede">{{ r.summary }}</p>
+
+  <div class="resource-grid">
+    <div>
+      <div class="media thumb--{{ r.type | downcase }}">
+        {% if r.youtube_id %}
+          <iframe src="https://www.youtube-nocookie.com/embed/{{ r.youtube_id }}" title="{{ r.title }}" allowfullscreen></iframe>
+        {% elsif r.video_url %}
+          <video src="{{ r.video_url }}" controls loop playsinline></video>
+        {% elsif r.image_url %}
+          <img src="{{ r.image_url | relative_url }}" alt="{{ r.title }}">
+        {% else %}
+          <div class="media-placeholder"><span>{{ r.type }} preview</span><small>Add <code>youtube_id</code>, <code>video_url</code> or <code>image_url</code> to this resource’s file</small></div>
+        {% endif %}
+      </div>
+      <div class="prose">{{ content }}</div>
+    </div>
+
+    <aside class="details">
+      {% if r.download_url %}
+        <a class="btn btn-primary btn-block" href="{{ r.download_url }}">Download {{ r.format | default: "" }}</a>
+      {% endif %}
+      <dl>
+        <dt>Type</dt><dd>{{ r.type }}</dd>
+        <dt>Topic</dt><dd>{{ r.topic }}</dd>
+        <dt>Audience</dt><dd>{{ r.audience | join: ", " }}</dd>
+        {% if r.period %}<dt>Time period</dt><dd>{{ r.period }}</dd>{% endif %}
+        {% if r.data_source %}<dt>Data source</dt><dd>{{ r.data_source }}</dd>{% endif %}
+        {% if r.created_by %}<dt>Created by</dt><dd>{{ r.created_by }}</dd>{% endif %}
+      </dl>
+      {% if r.citation %}
+        <div class="cite">
+          <p class="cite-label">How to cite</p>
+          <p class="cite-text">{{ r.citation }}</p>
+          <button class="btn btn-ghost btn-small" data-copy="{{ r.citation | escape }}">Copy citation</button>
+        </div>
+      {% endif %}
+    </aside>
+  </div>
+
+  {% assign related = site.resources | where: "topic", r.topic | where_exp: "x", "x.url != r.url" %}
+  {% if related.size > 0 %}
+    <section class="related">
+      <h2>More on {{ r.topic }}</h2>
+      <div class="card-grid">
+        {% for x in related limit: 3 %}{% include resource-card.html resource=x %}{% endfor %}
+      </div>
+    </section>
+  {% endif %}
+</div>
