@@ -1,0 +1,46 @@
+---
+title: Library
+permalink: /library/
+---
+<section class="page-head">
+  <div class="wrap">
+    <h1>Resource Library</h1>
+    <p class="lede">Every animation, video, figure, dataset, and lesson in one place. Filter by type, topic, or audience.</p>
+    <div class="search">
+      <input id="search" type="search" placeholder="Search resources, e.g. “1997”, “sea surface temperature”…" aria-label="Search resources">
+    </div>
+  </div>
+</section>
+
+<div class="wrap library">
+  <aside class="filters" aria-label="Filters">
+    <div class="filters-head">
+      <strong>Filter</strong>
+      <button class="link-btn" id="clear-filters">Clear all</button>
+    </div>
+    {% assign groups = "type,topic,audience" | split: "," %}
+    {% for g in groups %}
+      {% if g == "type" %}{% assign opts = site.resource_types %}{% assign label = "Type" %}
+      {% elsif g == "topic" %}{% assign opts = site.topics %}{% assign label = "Topic" %}
+      {% else %}{% assign opts = site.audiences %}{% assign label = "Audience" %}{% endif %}
+      <fieldset>
+        <legend>{{ label }}</legend>
+        {% for o in opts %}
+          <label><input type="checkbox" name="{{ g }}" value="{{ o }}"> {{ o }}</label>
+        {% endfor %}
+      </fieldset>
+    {% endfor %}
+  </aside>
+
+  <section>
+    <div class="results-bar">
+      <p id="result-count" aria-live="polite">{{ site.resources.size }} resources</p>
+      <button class="btn btn-ghost btn-small filters-toggle">Filters</button>
+    </div>
+    <div class="card-grid" id="results">
+      {% assign all = site.resources | sort: "title" %}
+      {% for r in all %}{% include resource-card.html resource=r %}{% endfor %}
+    </div>
+    <p class="empty" id="empty" hidden>No resources match those filters. <button class="link-btn" id="clear-filters-2">Clear filters</button></p>
+  </section>
+</div>
