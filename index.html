@@ -10,20 +10,13 @@ title: Home
       <div class="hero-actions">
         <a class="btn btn-primary" href="{{ '/library/' | relative_url }}">Browse the library</a>
         <a class="btn btn-ghost-light" href="{{ '/learn/' | relative_url }}">What is El Niño?</a>
+        <a class="btn btn-ghost-light" href="{{ '/library/' | relative_url }}?topic=Historical%20Events">Explore El Niño events</a>
       </div>
     </div>
     {% assign hero = site.resources | where: "hero", true | first %}
     <a class="hero-feature" href="{% if hero %}{{ hero.url | relative_url }}{% else %}{{ '/library/' | relative_url }}{% endif %}">
       <div class="hero-media" aria-hidden="true"><div class="globe"></div></div>
       <p class="hero-caption"><span class="badge">Featured</span> {% if hero %}{{ hero.title }}{% else %}Featured animation{% endif %}</p>
-    </a>
-  </div>
-  <div class="wrap">
-    <a class="timeline" href="{{ '/library/' | relative_url }}?topic=Historical%20Events">
-      <span>Explore El Niño events</span>
-      <span><strong>1950</strong></span>
-      <div class="timeline-track" aria-hidden="true"></div>
-      <span><strong>Today</strong></span>
     </a>
   </div>
 </section>
