@@ -1,0 +1,16 @@
+{% assign r = include.resource %}
+<a class="card" href="{{ r.url | relative_url }}"
+   data-type="{{ r.type }}" data-topic="{{ r.topic }}" data-audience="{{ r.audience | join: '|' }}"
+   data-search="{{ r.title | downcase }} {{ r.summary | downcase }}">
+  <div class="thumb thumb--{{ r.type | downcase }}">
+    {% if r.thumbnail %}<img src="{{ r.thumbnail | relative_url }}" alt="" loading="lazy">
+    {% elsif r.youtube_id %}<img src="https://i.ytimg.com/vi/{{ r.youtube_id }}/hqdefault.jpg" alt="" loading="lazy">{% endif %}
+    <span class="badge">{{ r.type }}</span>
+    {% if r.duration %}<span class="duration">{{ r.duration }}</span>{% endif %}
+  </div>
+  <div class="card-body">
+    <p class="card-topic">{{ r.topic }}</p>
+    <h3>{{ r.title }}</h3>
+    <p class="card-summary">{{ r.summary }}</p>
+  </div>
+</a>
