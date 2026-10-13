@@ -1,16 +1,14 @@
-{% assign r = include.resource %}
-<a class="card" href="{{ r.url | relative_url }}"
-   data-type="{{ r.type }}" data-topic="{{ r.topic }}" data-audience="{{ r.audience | join: '|' }}"
-   data-search="{{ r.title | downcase }} {{ r.summary | downcase }}">
-  <div class="thumb thumb--{{ r.type | downcase }}">
-    {% if r.thumbnail %}<img src="{{ r.thumbnail | relative_url }}" alt="" loading="lazy">
-    {% elsif r.youtube_id %}<img src="https://i.ytimg.com/vi/{{ r.youtube_id }}/hqdefault.jpg" alt="" loading="lazy">{% endif %}
-    <span class="badge">{{ r.type }}</span>
-    {% if r.duration %}<span class="duration">{{ r.duration }}</span>{% endif %}
-  </div>
-  <div class="card-body">
-    <p class="card-topic">{{ r.topic }}</p>
-    <h3>{{ r.title }}</h3>
-    <p class="card-summary">{{ r.summary }}</p>
-  </div>
-</a>
+---
+title: "VIDEO TITLE"            # replace with the YouTube title
+type: Video
+topic: ENSO Basics              # one of: ENSO Basics, Ocean, Atmosphere, Impacts, Forecasting, Historical Events
+audience: [General Public, Students]
+summary: "One-sentence description of the video."
+duration: "0:00"                # replace with the video length
+featured: true
+youtube_id: "p6AdLhFutNU"
+created_by: "CHANNEL NAME"      # the YouTube channel that made the video
+citation: "CHANNEL NAME (YEAR). VIDEO TITLE [Video]. YouTube. https://youtu.be/p6AdLhFutNU"
+---
+
+Describe what the video covers and how it can be used in teaching or self-study.
